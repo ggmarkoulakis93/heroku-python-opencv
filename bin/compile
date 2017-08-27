@@ -9,7 +9,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 # fetch and cache the .so file
-OPENCV_PACKAGE="https://raw.githubusercontent.com/zrsmith92/heroku-python-opencv/master/opencv-libs.tar.gz"
+OPENCV_PACKAGE="https://media.githubusercontent.com/media/zrsmith92/heroku-python-opencv/master/opencv-libs.tar.gz"
 OPENCV_PACKAGE_ETAG=$(curl -s --head "$OPENCV_PACKAGE" | grep -Ei '^etag' | sed -r 's/^etag|[^a-zA-Z0-9]+//gi')
 VENDORED_OPENCV="/app/vendor/opencv"
 OPENCV_CACHE="$CACHE_DIR/opencv_$OPENCV_PACKAGE_ETAG";
