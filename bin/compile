@@ -33,6 +33,7 @@ cp -a "$VENDORED_OPENCV/opencv-libs/." $VENDORED_SO
 
 # Google cloud credentials
 
+echo "-----> Writing gcloud credentials to file"
 mkdir -p /app/vendor/gcloud
 echo $GOOGLE_APPLICATION_STRING > /app/vendor/gcloud/application-credentials.json
 
