@@ -9,7 +9,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 # fetch and cache the .so file
-OPENCV_PACKAGE="https://media.githubusercontent.com/media/zrsmith92/heroku-python-opencv/master/opencv-libs.tar.gz"
+OPENCV_PACKAGE="https://s3-us-west-2.amazonaws.com/open-cv-tar-file/opencv-libs.tar.gz"
 OPENCV_PACKAGE_ETAG=$(curl -s --head "$OPENCV_PACKAGE" | grep -Ei '^etag' | sed -r 's/^etag|[^a-zA-Z0-9]+//gi')
 VENDORED_OPENCV="/app/vendor/opencv"
 OPENCV_CACHE="$CACHE_DIR/opencv_$OPENCV_PACKAGE_ETAG";
@@ -30,12 +30,6 @@ echo "-----> Vendoring OpenCV shared objects into slug"
 VENDORED_SO="$BUILD_DIR/vendor/opencv/lib"
 mkdir -p $VENDORED_SO
 cp -a "$VENDORED_OPENCV/opencv-libs/." $VENDORED_SO
-
-# Google cloud credentials
-
-echo "-----> Writing gcloud credentials to file"
-mkdir -p /app/vendor/gcloud
-echo $GOOGLE_APPLICATION_STRING > /app/vendor/gcloud/application-credentials.json
 
 # runtime
 mkdir -p "$BUILD_DIR/.profile.d"
